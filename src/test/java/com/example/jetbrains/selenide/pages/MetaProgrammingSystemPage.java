@@ -1,181 +1,188 @@
 package com.example.jetbrains.selenide.pages;
 
-import com.example.jetbrainstest.AllureLogger;
+import com.example.jetbrains.selenide.AllureLogger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.slf4j.LoggerFactory;
 
+import java.time.Duration;
+
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.webdriver;
+import static com.codeborne.selenide.WebDriverConditions.urlContaining;
+
 // page_url = https://www.jetbrains.com/mps/
 public class MetaProgrammingSystemPage {
     private final AllureLogger LOG = new AllureLogger(LoggerFactory.getLogger(MetaProgrammingSystemPage.class));
     WebDriver driver;
 
-    @FindBy(css = "a[data-test='button' ][href ='/mps/downloadd/']")
-    private WebElement downloadButton;
+    private  static  final By DOWN_LOAD_BUTTON = By.cssSelector("a[data-test='button' ][href ='/mps/downloadd/']");
 
-    @FindBy(css = "a[href ='/mps/nextversion/']")
-    private WebElement eapProgramButton;
+    private  static  final By EAP_PROGRAMM_BUTTON = By.cssSelector("a[href ='/mps/nextversion/']");
 
-    @FindBy(css = "a[href ='/mps/whatsnew/']")
-    private WebElement whatsNewButton;
+    private  static  final By WHATS_NEW_BUTTON = By.cssSelector("a[href ='/mps/whatsnew/']");
 
-    @FindBy(css = "a[href ='/mps/concepts/']")
-    private WebElement howItsWorksButton;
+    private  static  final By HOW_ITS_WORK_BUTTON = By.cssSelector("a[href ='/mps/concepts/']");
 
-    @FindBy(css = "a[href ='/mps/learn/']")
-    private WebElement learnMpsButton;
+    private  static  final By LEARN_MPS_BUTTON = By.cssSelector("a[href ='/mps/learn/']");
 
-    @FindBy(css = "a[href ='/mps/support/']")
-    private WebElement servicesButton;
+    private  static  final By SERVICE_BUTTON = By.cssSelector("a[href ='/mps/support/']");
 
-    @FindBy(css = "a[href='/help/mps/mps-faq.html']")
-    private WebElement faqButton;
+    private  static  final By FAQ_BUTTON = By.cssSelector("a[href='/help/mps/mps-faq.html']");
 
-    @FindBy(css = "a[href='https://www.jetbrains.com/help/mps/migration-guide.html']")
-    private WebElement migrationGuideButton;
+    private  static  final By MIGRATION_GUIDE_BUTTON = By.cssSelector("a[href='https://www.jetbrains.com/help/mps/migration-guide.html']");
 
-    @FindBy(css = "h1[class='wt-h2']")
-    private WebElement textOnDownloadPage;
+    private  static  final By TEXT_ON_DOWNLOAD_PAGE = By.cssSelector("h1[class='wt-h2']");
 
-    @FindBy(css = "a[href='https://www.jetbrains.com/help/mps/fast-track-to-mps.html']")
-    private WebElement getStartedButton;
+    private  static  final By GET_STARTED_BUTTON = By.cssSelector("a[href='https://www.jetbrains.com/help/mps/fast-track-to-mps.html']");
 
-    @FindBy(css = "button[data-test='site-header-search-action']")
-    private WebElement searchButton;
+    private  static  final By SEARCH_BUTTON = By.cssSelector("button[data-test='site-header-search-action']");
 
-    @FindBy(css = "input[data-test-id='search-input']")
-    private WebElement searchField;
+    private  static  final By SEARCH_FIELD = By.cssSelector("input[data-test-id='search-input']");
 
-    @FindBy(css = "h1[class='_rs-hero_18dgpd9_1 _rs-typography_theme_dark_18dgpd9_1 _rs-text_hardness_auto_18dgpd9_1 wt-offset-top-24']")
-    private WebElement mainPageText;
+    private  static  final By MAIN_PAGE_TEXT = By.cssSelector("h1[class='_rs-hero_18dgpd9_1 _rs-typography_theme_dark_18dgpd9_1 _rs-text_hardness_auto_18dgpd9_1 wt-offset-top-24']");
 
-    @FindBy(css = "span[data-test='menu-second-title-box-title']")
-    private WebElement mpsMainPageText;
+    private  static  final By MPS_MAIN_PAGE_TEXT = By.cssSelector("span[data-test='menu-second-title-box-title']");
 
-    @FindBy(css = "a[data-test='site-header-cart-action']")
-    private WebElement storeButton;
+    private  static  final By STORE_BUTTON = By.cssSelector("a[data-test='site-header-cart-action']");
 
-    @FindBy(css = "a[href='https://account.jetbrains.com/']")
-    private WebElement profileButton;
+    private  static  final By PROFILE_BUTTON = By.cssSelector("a[href='https://account.jetbrains.com/']");
 
-    @FindBy(css = "button[aria-label='Open language selection']")
-    private WebElement languageButton;
+    private  static  final By LANGUAGE_BUTTOM = By.cssSelector("button[aria-label='Open language selection']");
 
     public String checkSendTextIntoSearchField(String input) {
         LOG.infoWithScreenshot("Проверка URL после search");
         clickSearchButton();
-        searchField.sendKeys(input);
-        searchField.submit();
-        return getCurentUrlSearchPage();
+        $(SEARCH_FIELD).sendKeys(input);
+        $(SEARCH_FIELD).pressEnter();
+        return getCurentUrlSearchPage("www");
     }
 
     public Boolean checkIfSearchButtonIsClickable() {
         LOG.infoWithScreenshot("Проверка кликабельности кнопки search");
-        return searchButton.isEnabled();
+        Boolean searchButton = $(SEARCH_BUTTON).isEnabled();
+        return searchButton;
     }
 
     public Boolean checkIfLanguageButtonIsClickable() {
         LOG.infoWithScreenshot("Проверка кликабельности кнопки смены языка");
-        return languageButton.isEnabled();
+        Boolean languageButton = $(LANGUAGE_BUTTOM).isEnabled();
+        return languageButton;
     }
 
     public Boolean checkIfProfileButtonIsClickable() {
         LOG.infoWithScreenshot("Проверка кликабельности кнопки profile");
-        return profileButton.isEnabled();
+        Boolean profileButton = $(PROFILE_BUTTON).isEnabled();
+        return profileButton;
     }
 
     public Boolean checkIfStoreButtonIsClickable() {
         LOG.infoWithScreenshot("Проверка кликабельности кнопки store");
-        return storeButton.isEnabled();
+        Boolean storeButton = $(STORE_BUTTON).isEnabled();
+        return storeButton;
     }
 
     public Boolean checkIfDownloadButtonIsClickable() {
         LOG.infoWithScreenshot("Проверка кликабельности кнопки Download");
-        return downloadButton.isEnabled();
+        Boolean downloadButton = $(DOWN_LOAD_BUTTON).isEnabled();
+        return downloadButton;
     }
 
     public Boolean checkIfEapProgramButtonIsClickable() {
         LOG.infoWithScreenshot("Проверка кликабельности кнопки EAP Program");
-        return eapProgramButton.isEnabled();
+        Boolean eapProgramButton = $(EAP_PROGRAMM_BUTTON).isEnabled();
+        return eapProgramButton;
     }
 
     public Boolean checkIfWhatsNewButtonIsClickable() {
         LOG.infoWithScreenshot("Проверка кликабельности кнопки Whats New");
-        return whatsNewButton.isEnabled();
+        Boolean whatsNewButton = $(WHATS_NEW_BUTTON).isEnabled();
+        return whatsNewButton;
     }
 
     public Boolean checkIfHowItsWorksButtonIsClickable() {
         LOG.infoWithScreenshot("Проверка кликабельности кнопки How Its Works");
-        return howItsWorksButton.isEnabled();
+        Boolean howItsWorksButton = $(HOW_ITS_WORK_BUTTON).isEnabled();
+        return howItsWorksButton;
     }
 
     public Boolean checkIfLearnMpsButtonIsClickable() {
         LOG.infoWithScreenshot("Проверка кликабельности кнопки Learn Mps");
-        return learnMpsButton.isEnabled();
+        Boolean learnMpsButton = $(LEARN_MPS_BUTTON).isEnabled();
+        return learnMpsButton;
     }
 
     public Boolean checkIfServicesButtonIsClickable() {
         LOG.infoWithScreenshot("Проверка кликабельности кнопки Services");
-        return servicesButton.isEnabled();
+        Boolean servicesButton = $(SERVICE_BUTTON).isEnabled();
+        return servicesButton;
     }
 
     public Boolean checkIfFaqButtonIsClickable() {
         clickDownloadElement();
         LOG.infoWithScreenshot("Проверка кликабельности кнопки FAQ");
-        return faqButton.isEnabled();
+        Boolean faqButton = $(FAQ_BUTTON).isEnabled();
+        return faqButton;
     }
 
     public Boolean checkIfMigrationGuideButtonIsClickable() {
         clickDownloadElement();
         LOG.infoWithScreenshot("Проверка кликабельности кнопки Migration Guide");
-        return migrationGuideButton.isEnabled();
+        Boolean migrationGuideButton = $(MIGRATION_GUIDE_BUTTON).isEnabled();
+        return migrationGuideButton;
     }
 
     public Boolean checkIfGetStartedButtonIsClickable() {
         clickLearnMpsElement();
         LOG.infoWithScreenshot("Проверка кликабельности кнопки Get Started");
-        return getStartedButton.isEnabled();
+        Boolean getStartedButton = $(GET_STARTED_BUTTON).isEnabled();
+        return getStartedButton;
     }
 
     public String checkTextOnDownloadPage() {
         clickDownloadElement();
         LOG.infoWithScreenshot("Проверка текста Download MPS");
-        return textOnDownloadPage.getText();
+        String textOnDownloadPage = $(TEXT_ON_DOWNLOAD_PAGE).getText();
+        return textOnDownloadPage;
     }
 
     public String checkMpsTextOnMainPage() {
         LOG.infoWithScreenshot("Проверка текста Download MPS");
-        return mpsMainPageText.getText();
+        String mpsMainPageText = $(MPS_MAIN_PAGE_TEXT).getText();
+        return mpsMainPageText;
     }
 
     public String checkTextOnMainPage() {
         LOG.infoWithScreenshot("Проверка текста Download MPS");
-        return mainPageText.getText();
+        String mainPageText = $(MAIN_PAGE_TEXT).getText();
+        return mainPageText;
     }
 
     public String getCurentUrlDownloadPage() {
         LOG.infoWithScreenshot("Переход на страницу загрузки");
         clickDownloadElement();
-        return driver.getCurrentUrl();
+        return webdriver().driver().getCurrentFrameUrl();
     }
 
     public String getCurentUrlLearnMpsPage() {
         LOG.infoWithScreenshot("Переход на страницу Learn MPS");
         clickLearnMpsElement();
-        return driver.getCurrentUrl();
+        return webdriver().driver().getCurrentFrameUrl();
     }
 
-    public String getCurentUrlSearchPage() {
+    public String getCurentUrlSearchPage(String partOfUrl) {
         LOG.infoWithScreenshot("Переход на страницу Learn MPS");
-        return driver.getCurrentUrl();
+        webdriver().shouldHave(urlContaining(partOfUrl.toLowerCase()), Duration.ofSeconds(3));
+        return webdriver().driver().getCurrentFrameUrl();
     }
 
     public String getCurentUrlGetStartedPage() {
         LOG.infoWithScreenshot("Переход на страницу Get Started");
         clickGetStartedElement();
-        return driver.getCurrentUrl();
+        return webdriver().driver().getCurrentFrameUrl();
     }
 
     public MetaProgrammingSystemPage(WebDriver driver) {
@@ -184,19 +191,19 @@ public class MetaProgrammingSystemPage {
     }
 
     public void clickDownloadElement() {
-        downloadButton.click();
+        $(DOWN_LOAD_BUTTON).click();
     }
 
     public void clickLearnMpsElement() {
-        learnMpsButton.click();
+        $(LEARN_MPS_BUTTON).click();
     }
 
     public void clickGetStartedElement() {
-        getStartedButton.click();
+        $(GET_STARTED_BUTTON).click();
     }
 
     public void clickSearchButton() {
-        searchButton.click();
+        $(SEARCH_BUTTON).click();
     }
 }
 

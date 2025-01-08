@@ -11,15 +11,15 @@ import org.slf4j.LoggerFactory;
 import java.time.Duration;
 
 public class MyWait {
-    AllureLogger LOG = new AllureLogger(LoggerFactory.getLogger(MyWaitMPS.class));
+    AllureLogger LOG = new AllureLogger(LoggerFactory.getLogger(MyWait.class));
     private WebDriverWait wait;
     private final int secondsToWait;
 
-    public static MyWaitMPS myWaitMPS(int seconds) {
-        return new MyWaitMPS(seconds);
+    public static MyWait myWaitMPS(int seconds) {
+        return new MyWait(seconds);
     }
 
-    public MyWaitMPS(int seconds) {
+    public MyWait(int seconds) {
         this.secondsToWait = seconds;
         wait = new WebDriverWait(BaseTest.getDriver(), Duration.ofSeconds(seconds));
     }

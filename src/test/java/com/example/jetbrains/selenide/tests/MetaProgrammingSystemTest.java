@@ -1,9 +1,9 @@
 package com.example.jetbrains.selenide.tests;
 
 
-import com.example.jetbrainstest.AllureLogger;
-import com.example.jetbrainstest.MyExtension;
-import com.example.jetbrainstest.pages.MetaProgrammingSystemPage;
+import com.example.jetbrains.selenide.AllureLogger;
+import com.example.jetbrains.selenide.MyExtension;
+import com.example.jetbrains.selenide.pages.MetaProgrammingSystemPage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -24,7 +24,6 @@ public class MetaProgrammingSystemTest extends BaseTest {
     @Override
     public void setUp() {
         super.setUp();
-        getDriver().get("https://www.jetbrains.com/mps/");
         MetaProgrammingSystem = new MetaProgrammingSystemPage(getDriver());
     }
 
@@ -90,7 +89,7 @@ public class MetaProgrammingSystemTest extends BaseTest {
     public void SearchFieldCheck() {
         MetaProgrammingSystem.checkSendTextIntoSearchField("Selenium");
         String expectedUrl = "https://www.jetbrains.com/mps/?q=Selenium&s=full";
-        String actualUrl = MetaProgrammingSystem.getCurentUrlSearchPage();
+        String actualUrl = MetaProgrammingSystem.getCurentUrlSearchPage("www");
         assertEquals(expectedUrl, actualUrl, "URL не совпадают");
     }
 
