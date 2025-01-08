@@ -5,8 +5,8 @@ import org.junit.platform.suite.api.SelectPackages;
 import org.junit.platform.suite.api.Suite;
 
 @Suite
-@SelectPackages("com.example.jetbrainstest.tests")
-@IncludeTags("AnotherCheck")
+@SelectPackages("com.example.jetbrains.selenide.tests")
+@IncludeTags("1")
 public class MetaProgrammingSystemSuite {
 }
 

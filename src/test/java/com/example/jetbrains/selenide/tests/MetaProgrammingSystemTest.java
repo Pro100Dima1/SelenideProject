@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.LoggerFactory;
 
+import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -24,6 +25,7 @@ public class MetaProgrammingSystemTest extends BaseTest {
     @Override
     public void setUp() {
         super.setUp();
+        MetaProgrammingSystem = new MetaProgrammingSystemPage(getDriver());
     }
 
     @Test
@@ -35,7 +37,7 @@ public class MetaProgrammingSystemTest extends BaseTest {
 
     @Test
     @DisplayName("Проверка, что кнопка смены языка активна")
-    @Tag("MpsPageButton")
+    @Tag("1")
     public void languageButtonCheck() {
         assertTrue(MetaProgrammingSystem.checkIfLanguageButtonIsClickable(), "Кнопка смены языка не активна");
     }

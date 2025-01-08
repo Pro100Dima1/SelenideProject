@@ -16,6 +16,8 @@ import static com.codeborne.selenide.WebDriverConditions.urlContaining;
 
 // page_url = https://www.jetbrains.com/mps/
 public class MetaProgrammingSystemPage {
+    public MetaProgrammingSystemPage() {}
+
     private final AllureLogger LOG = new AllureLogger(LoggerFactory.getLogger(MetaProgrammingSystemPage.class));
     WebDriver driver;
 
@@ -184,6 +186,12 @@ public class MetaProgrammingSystemPage {
         clickGetStartedElement();
         return webdriver().driver().getCurrentFrameUrl();
     }
+
+    public MetaProgrammingSystemPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+
 
     public void clickDownloadElement() {
         $(DOWN_LOAD_BUTTON).click();

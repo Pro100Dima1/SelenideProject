@@ -32,8 +32,8 @@ public class BaseTest {
     @BeforeEach
     public void setUp() {
         Configuration.browserCapabilities = new ChromeOptions().addArguments("--remote-allow-origins=*");
-        metaProgrammingSystemPage = page();
         open("\"https://www.jetbrains.com/mps/\"");
+        metaProgrammingSystemPage = page();
     }
 
     public static WebDriver getDriver() {
