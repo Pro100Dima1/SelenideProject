@@ -24,7 +24,6 @@ public class MetaProgrammingSystemTest extends BaseTest {
     @Override
     public void setUp() {
         super.setUp();
-        MetaProgrammingSystem = new MetaProgrammingSystemPage(getDriver());
     }
 
     @Test

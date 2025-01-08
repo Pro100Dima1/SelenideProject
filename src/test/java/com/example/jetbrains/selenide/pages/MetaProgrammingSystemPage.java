@@ -185,11 +185,6 @@ public class MetaProgrammingSystemPage {
         return webdriver().driver().getCurrentFrameUrl();
     }
 
-    public MetaProgrammingSystemPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
-
     public void clickDownloadElement() {
         $(DOWN_LOAD_BUTTON).click();
     }
